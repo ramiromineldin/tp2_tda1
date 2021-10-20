@@ -3,27 +3,26 @@ from copy import deepcopy
 from BellmanFord import bellman_ford, obtener_aristas
 from grafo import Grafo
 
-def johnson(mapa_depositos):
+def johnson(grafo):
 	mapa_depositos.agregar_vertice("inicio")
-	for nodo in mapa_depositos:
-		mapa_depositos.agregar_arista("inicio", nodo, 0)
+	for nodo in grafo:
+		grafo.agregar_arista("inicio", nodo, 0)
 
-	distancia, padres = bellman_ford(mapa_depositos, "inicio")
+	distancia, padres = bellman_ford(grafo, "inicio")
 	padres.pop("inicio")
 
-	mapa_depositos_actualizado = deepcopy(mapa_depositos)
+	grafo_nuevo = deepcopy(grafo)
 
-	aristas = obtener_aristas(mapa_depositos)
+	aristas = obtener_aristas(grafo)
 
 	for i,j in aristas:
-		peso_anterior = mapa_depositos.peso_arista(i,j)
-		mapa_depositos_actualizado.cambiar_peso(i, j, peso_anterior + distancia[i] - distancia[j])
+		peso_anterior = grafo.peso_arista(i,j)
+		grafo_nuevo.cambiar_peso(i, j, peso_anterior + distancia[i] - distancia[j])
 
-	mapa_depositos_actualizado.borrar_vertice("inicio")
-	#print(("mapa: {}").format(mapa_depositos_actualizado))
-
+	grafo_nuevo.borrar_vertice("inicio")
+	
 	distancias_minimas = {}
-	for nodo in mapa_depositos_actualizado:
-		distancias_minimas[nodo] = dijkstra(mapa_depositos_actualizado, nodo)
+	for nodo in grafo_nuevo:
+		distancias_minimas[nodo] = dijkstra(grafo_nuevo, nodo)
 
 	return distancias_minimas
