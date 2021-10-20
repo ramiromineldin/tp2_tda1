@@ -4,7 +4,7 @@ from BellmanFord import bellman_ford, obtener_aristas
 from grafo import Grafo
 
 def johnson(grafo):
-	mapa_depositos.agregar_vertice("inicio")
+	grafo.agregar_vertice("inicio")
 	for nodo in grafo:
 		grafo.agregar_arista("inicio", nodo, 0)
 
@@ -20,7 +20,7 @@ def johnson(grafo):
 		grafo_nuevo.cambiar_peso(i, j, peso_anterior + distancia[i] - distancia[j])
 
 	grafo_nuevo.borrar_vertice("inicio")
-	
+
 	distancias_minimas = {}
 	for nodo in grafo_nuevo:
 		distancias_minimas[nodo] = dijkstra(grafo_nuevo, nodo)

@@ -11,6 +11,9 @@ with open("depositos.txt", "r") as archivo:
 
 distancias_minimas = johnson(mapa_ciudades)
 
+print("La solucion de Johnson es: ")
+print(distancias_minimas)
+
 sumas = {}
 for i in distancias_minimas:
 	sumas[i] = 0
@@ -19,4 +22,5 @@ for i in distancias_minimas:
 
 
 ciudad_elegida = min(sumas, key=sumas.get)
-print(ciudad_elegida)
+
+print(("La ciudad donde deberia ubicarse en el deposito es: {}").format(ciudad_elegida))

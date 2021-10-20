@@ -68,13 +68,13 @@ class Grafo:
         return True
 
     def cambiar_peso(self, inicio, fin, peso):
-    	if not inicio in self.vertices or not fin in self.vertices or inicio == fin:
-           return False	
-
+        if not inicio in self.vertices or not fin in self.vertices or inicio == fin:
+           return False 
+        
         self.vertices[inicio][fin] = peso
 
         if self.estado_es_dirigido == False:
-        	self.vertices[fin][inicio] = peso
+            self.vertices[fin][inicio] = peso
 
         return True
 
