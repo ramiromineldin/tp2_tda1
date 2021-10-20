@@ -1,50 +1,31 @@
 from grafo import Grafo
+def obtener_aristas(grafo):
+    aristas = []
+    for v in grafo:
+        for w in grafo.adyacentes(v):
+            aristas.append((v,w))
+    return aristas
 
 
-def bellman_ford(grafo, inicio):
-    distancias = {}
-    distancia = [None] * (len(grafo.obtener_vertices()))
-    vertices = grafo.obtener_vertices()
+def bellman_ford(grafo, origen):
+    distancia = {}
+    padres = {}
+    aristas = obtener_aristas(grafo)
+    for v in grafo:
+        distancia[v] = float("inf")
+    distancia[origen] = 0
+    padres[origen] = None
 
-    for v in vertices:
-        distancia[vertices.index(v)] = float("inf")
-        distancia[vertices.index(inicio)] = 0
+    for i in range(len(grafo)):
+        for v,w in aristas:
+            if distancia[w] > distancia[v] + grafo.peso_arista(v,w):
+                distancia[w] = distancia[v] + grafo.peso_arista(v,w)
+                padres[w] = v
 
-    for _ in range(1, len(vertices)):
-        for vertice in vertices:
-            adyacentes = grafo.adyacentes(vertice)
-            v = vertices.index(vertice)
-            for adyacente in adyacentes:
-                a = vertices.index(adyacente)
-                peso = grafo.peso_arista(vertice, adyacente)
-                if distancia[v] + peso < distancia[a]:
-                    distancia[a] = distancia[v] + peso
-                    distancias["distancia " + adyacente + "-" + inicio] = distancia[a]
-
-    for vertice in vertices:
-        adyacentes = grafo.adyacentes(vertice)
-        if len(adyacentes) > 0:
-            adyacente = grafo.adyacentes(vertice)[0]
-            peso = grafo.peso_arista(vertice, adyacente)
-
-            if distancia[vertices.index(vertice)] + peso < distancia[vertices.index(adyacente)]:
-                print("Ciclo negativo!!!")
-
+    for v,w in aristas:
+        if distancia[w] > distancia[v] + grafo.peso_arista(v,w):
+            print ("hay ciclo negativo")
+            return False
     print(distancia)
-    print(distancias)
-    return distancia
+    return True
 
-
-g = Grafo(True)
-g.agregar_vertice('a')
-g.agregar_vertice('b')
-g.agregar_vertice('c')
-g.agregar_vertice('d')
-g.agregar_vertice('e')
-g.agregar_arista('a','b',1)
-g.agregar_arista('b','c',3)
-g.agregar_arista('c','e',5)
-g.agregar_arista('e','a',2)
-g.agregar_arista('c','d',3)
-
-print(bellman_ford(g,'a'))
