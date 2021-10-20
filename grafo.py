@@ -51,7 +51,7 @@ class Grafo:
     def agregar_arista(self, inicio, fin, peso):
         """Agrega una arista al grafo que conecta los vertices pasados por parametro. En caso de que el grafo sea no pesado pasar como
         parametro None. En caso de agregarla correctamente devuelve True. 
-        Si la clave de inicio o fin no se encuentra en el grafo o si el peso de la arista es 0 devuelve Falso"""
+        Si la clave de inicio o fin no se encuentra en el grafo devuelve Falso"""
         
         if not inicio in self.vertices or not fin in self.vertices or self.estan_unidos(inicio, fin) or inicio == fin:
            return False
@@ -65,6 +65,17 @@ class Grafo:
             self.vertices[fin][inicio] = peso
 
         self.cantidad_aristas += 1
+        return True
+
+    def cambiar_peso(self, inicio, fin, peso):
+    	if not inicio in self.vertices or not fin in self.vertices or inicio == fin:
+           return False	
+
+        self.vertices[inicio][fin] = peso
+
+        if self.estado_es_dirigido == False:
+        	self.vertices[fin][inicio] = peso
+
         return True
 
     def total_aristas(self): 

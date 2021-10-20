@@ -20,12 +20,12 @@ def bellman_ford(grafo, origen):
         for v,w in aristas:
             if distancia[w] > distancia[v] + grafo.peso_arista(v,w):
                 distancia[w] = distancia[v] + grafo.peso_arista(v,w)
-                padres[w] = v
+                padres[w] = padres.get(w,[])
+                padres[w].append(v)
 
     for v,w in aristas:
         if distancia[w] > distancia[v] + grafo.peso_arista(v,w):
             print ("hay ciclo negativo")
             return False
-    print(distancia)
-    return True
-
+            
+    return distancia,padres

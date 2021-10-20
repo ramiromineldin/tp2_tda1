@@ -19,21 +19,5 @@ def dijkstra(grafo, origen):
                 padre[w] = v
                 heapq.heappush(heap,(dist[w], w))
 
-    return padre, dist
-
-
-g = Grafo(True)
-g.agregar_vertice('a')
-g.agregar_vertice('b')
-g.agregar_vertice('c')
-g.agregar_vertice('d')
-g.agregar_vertice('e')
-g.agregar_arista('a','b',1)
-g.agregar_arista('b','c',3)
-g.agregar_arista('c','e',5)
-g.agregar_arista('e','a',2)
-g.agregar_arista('c','d',3)
-
-
-print(dijkstra(g,'a'))
+    return dist
 
