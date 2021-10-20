@@ -1,5 +1,6 @@
 from grafo import Grafo
 from Dijkstra importa dijkstra 
+from BellmanFord import bellman_ford
 
 mapa_depositos = Grafo(True)
 with open("depositos.txt", "r") as archivo:
@@ -12,3 +13,5 @@ with open("depositos.txt", "r") as archivo:
 mapa_depositos.agregar_vertice("inicio")
 for nodo in mapa_depositos:
 	mapa_depositos.agregar_arista("inicio", nodo, 0)
+
+bellman_ford(mapa_depositos, "inicio")
