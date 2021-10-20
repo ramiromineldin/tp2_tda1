@@ -19,7 +19,7 @@ def bellman_ford(grafo, inicio):
                 peso = grafo.peso_arista(vertice, adyacente)
                 if distancia[v] + peso < distancia[a]:
                     distancia[a] = distancia[v] + peso
-                    distancias[adyacente] = distancia[a]
+                    distancias["distancia " + adyacente + "-" + inicio] = distancia[a]
 
     for vertice in vertices:
         adyacentes = grafo.adyacentes(vertice)
