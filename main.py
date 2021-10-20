@@ -2,7 +2,10 @@ from grafo import Grafo
 from johnson import johnson
 
 mapa_ciudades = Grafo(True)
-with open("depositos.txt", "r") as archivo:
+nombre_arch = input("Ingrese el nombre del archivo de depositos que desea procesar (sin extension): ")
+nombre_arch_extension = nombre_arch + ".txt"
+
+with open(nombre_arch_extension, "r") as archivo:
 	for linea in archivo:
 		info = linea.replace("\r\n","").split(',')
 		mapa_ciudades.agregar_vertice(info[0])
