@@ -53,7 +53,7 @@ class Grafo:
         parametro None. En caso de agregarla correctamente devuelve True. 
         Si la clave de inicio o fin no se encuentra en el grafo o si el peso de la arista es 0 devuelve Falso"""
         
-        if not inicio in self.vertices or not fin in self.vertices or self.estan_unidos(inicio, fin) or peso == 0 or inicio == fin:
+        if not inicio in self.vertices or not fin in self.vertices or self.estan_unidos(inicio, fin) or inicio == fin:
            return False
      
         if peso == None:
