@@ -13,7 +13,9 @@ def pretty_print():
         for value in values.keys():
             sys.stdout.write(values.get(value).__str__())
             sys.stdout.write(" ")
+
         print
+        sys.stdout.write("\n")
 
 mapa_ciudades = Grafo(True)
 nombre_arch = input("Ingrese el nombre del archivo de depositos que desea procesar (sin extension): ")
@@ -37,7 +39,11 @@ for i in distancias_minimas:
 	for j in distancias_minimas[i]:
 		sumas[i] = sumas[i] + distancias_minimas[i][j]
 
-
 ciudad_elegida = min(sumas, key=sumas.get)
 
-print(("La ciudad donde deberia ubicarse en el deposito es: {}").format(ciudad_elegida))
+ciudades = []
+for nodo in sumas:
+	if sumas[nodo] == sumas[ciudad_elegida]:
+		ciudades.append(nodo)
+
+print(("La/s ciudad/es donde deberia ubicarse la fabrica es: {}").format(', '.join(ciudades)))

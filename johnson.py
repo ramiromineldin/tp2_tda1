@@ -10,7 +10,6 @@ def johnson(grafo):
 
 	distancia, padres = bellman_ford(grafo, "inicio")
 	padres.pop("inicio")
-
 	grafo_nuevo = deepcopy(grafo)
 
 	aristas = obtener_aristas(grafo)
