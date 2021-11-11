@@ -27,5 +27,5 @@ def bellman_ford(grafo, origen):
         if distancia[w] > distancia[v] + grafo.peso_arista(v,w):
             print ("hay ciclo negativo")
             return False
-            
+
     return distancia,padres

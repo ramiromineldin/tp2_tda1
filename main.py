@@ -1,21 +1,22 @@
 from grafo import Grafo
 from johnson import johnson
 import sys
+import pandas as pd
+import pprint
 
+# def pretty_print():
+#     sys.stdout.write("  ")
+#     print('  '.join(distancias_minimas.keys()))
+#     for key in distancias_minimas.keys():
+#         values = distancias_minimas.get(key)
+#         sys.stdout.write(key)
+#         sys.stdout.write("     ")
+#         for value in values.keys():
+#             sys.stdout.write(values.get(value).__str__())
+#             sys.stdout.write(" ")
 
-def pretty_print():
-    sys.stdout.write("  ")
-    print(' '.join(distancias_minimas.keys()))
-    for key in distancias_minimas.keys():
-        values = distancias_minimas.get(key)
-        sys.stdout.write(key)
-        sys.stdout.write(" ")
-        for value in values.keys():
-            sys.stdout.write(values.get(value).__str__())
-            sys.stdout.write(" ")
-
-        print
-        sys.stdout.write("\n")
+#         print
+#         sys.stdout.write("\n")
 
 mapa_ciudades = Grafo(True)
 nombre_arch = input("Ingrese el nombre del archivo de depositos que desea procesar (sin extension): ")
@@ -31,7 +32,8 @@ with open(nombre_arch_extension, "r") as archivo:
 distancias_minimas = johnson(mapa_ciudades)
 
 print("La solucion de Johnson es: ")
-pretty_print()
+print(pd.DataFrame(distancias_minimas).T) 
+#pretty_print()
 
 sumas = {}
 for i in distancias_minimas:
@@ -41,6 +43,8 @@ for i in distancias_minimas:
 
 ciudad_elegida = min(sumas, key=sumas.get)
 
+# En el caso de que varias ciudades tengan la misma distancia mínima hacia las otras, se imprimen todas
+# las que cumplen esa condición para que la empresa elija.
 ciudades = []
 for nodo in sumas:
 	if sumas[nodo] == sumas[ciudad_elegida]:
