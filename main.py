@@ -1,22 +1,19 @@
 from grafo import Grafo
 from johnson import johnson
 import sys
-import pandas as pd
-import pprint
 
-# def pretty_print():
-#     sys.stdout.write("  ")
-#     print('  '.join(distancias_minimas.keys()))
-#     for key in distancias_minimas.keys():
-#         values = distancias_minimas.get(key)
-#         sys.stdout.write(key)
-#         sys.stdout.write("     ")
-#         for value in values.keys():
-#             sys.stdout.write(values.get(value).__str__())
-#             sys.stdout.write(" ")
-
-#         print
-#         sys.stdout.write("\n")
+def pretty_print():
+    sys.stdout.write("\t")
+    print('\t'.join(distancias_minimas.keys()))
+    for key in distancias_minimas.keys():
+        values = distancias_minimas.get(key)
+        sys.stdout.write(key + ' ->')
+        sys.stdout.write("\t")
+        for value in values.keys():
+            sys.stdout.write(values.get(value).__str__())
+            sys.stdout.write("\t")
+        print
+        sys.stdout.write("\n")
 
 mapa_ciudades = Grafo(True)
 nombre_arch = input("Ingrese el nombre del archivo de depositos que desea procesar (sin extension): ")
@@ -32,8 +29,7 @@ with open(nombre_arch_extension, "r") as archivo:
 distancias_minimas = johnson(mapa_ciudades)
 
 print("La solucion de Johnson es: ")
-print(pd.DataFrame(distancias_minimas).T) 
-#pretty_print()
+pretty_print()
 
 sumas = {}
 for i in distancias_minimas:
